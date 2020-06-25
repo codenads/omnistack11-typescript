@@ -27,7 +27,7 @@ export default class OngController {
 
         await knex('ongs').insert(ong);   
         
-        return response.json(id)
+        return response.json({id})
     }
 
     async index(request: Request, response: Response) {

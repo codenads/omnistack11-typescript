@@ -20,6 +20,6 @@ routes.delete('/incidents/:id', incidentController.delete)
 
 routes.get('/profile', profileController.index)
 
-routes.get('/sessions', sessionController.create)
+routes.post('/sessions', sessionController.create)
 
 export default routes;
