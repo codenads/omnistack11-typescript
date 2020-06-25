@@ -32,7 +32,6 @@ export default class OngController {
 
     async index(request: Request, response: Response) {
         const ongs = await knex('ongs').select('*');
-        
         return response.json(ongs)
     }
 }

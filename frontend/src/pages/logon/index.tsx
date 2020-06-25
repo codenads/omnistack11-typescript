@@ -10,17 +10,19 @@ import logoImg from '../../assets/logo.svg'
 
 const Logon = () => {
 
-    const [id, setId] = useState('')
+    const [id, setId] = useState('');
+
     const history = useHistory();
 
-    async function handleSubmit(e: any) {
-        e.preventDefault();
+    async function handleLogon(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
 
         try {
             const response = await api.post('/sessions', { id });
 
             localStorage.setItem('ongId', id);
-            localStorage.setItem('name', response.data.name);
+            localStorage.setItem('ongName', response.data.name);
+
             history.push('/profile')
 
         } catch(err) {
@@ -33,25 +35,28 @@ const Logon = () => {
         <div className="logonContainer">
             <section className="form">
 
-            <img src={logoImg} alt="Be The Hero"/>
+                <img src={logoImg} alt="Be The Hero"/>
 
-            <form onSubmit={handleSubmit}>
-                <h1>Faça seu logon</h1>
-                <input 
-                    type="text"
-                    value= {id}
-                    onChange={e => setId(e.target.value)}
-                    placeholder="Sua ID"
-                 />
-                <button className="button" type="submit">Entrar</button>
+                <form onSubmit={handleLogon}>
 
-                <Link className="backLink" to="/register">
-                    <FiLogIn size={16} color="#e02041"/>
-                    Não tenho cadastro
-                </Link>
-            </form>
+                    <h1>Faça seu logon</h1>
+
+                        <input 
+                            type="text"
+                            value= {id}
+                            onChange={event => setId(event.target.value)}
+                            placeholder="Sua ID"
+                        />
+                        <button className="button" type="submit">Entrar</button>
+
+                        <Link className="backLink" to="/register">
+                            <FiLogIn size={16} color="#e02041"/>
+                            Não tenho cadastro
+                        </Link>
+                </form>
 
             </section>
+
             <img src={heroesImg} alt="Heroes"/>
         </div>
     )

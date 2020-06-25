@@ -14,7 +14,6 @@ export default class IncidentController {
         const { page = 1 } = request.query;
 
         const [count] = await knex('incidents').count();
-
         const incidents = await knex('incidents')
                 .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
                 .limit(5)
@@ -27,8 +26,8 @@ export default class IncidentController {
                     'ongs.uf']);
 
         response.header('count', count); 
-
-        return response.json(incidents);
+        if(!incidents) return response.status(204).json({ error: 'Não há incidentes cadastrados' })
+        else return response.json(incidents);
     }
 
     async create(request: Request, response: Response) {
@@ -43,7 +42,8 @@ export default class IncidentController {
 
         const [id] = await knex('incidents').insert(incident);
 
-        return response.json({ id });
+        if(!id) return response.status(400).json({ error: 'Não foi possível criar o incidente'});
+        else return response.json({ id });
     }
 
     async delete(request: Request, response: Response) {
@@ -60,7 +60,6 @@ export default class IncidentController {
             return response.status(204).send();
         } 
         else return response.status(401).json({ error: 'Não autorizado.'})
-
 
     }
 }
