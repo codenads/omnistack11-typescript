@@ -79,8 +79,7 @@ const Profile = () => {
                                 <button onClick={() => handleDeleteIncident(incident.id)} type='button'>
                                     <FiTrash2 size={20}/>
                                 </button>
-                                </li>)
-                            )
+                                </li>))
                 }
             </ul>
         </div>

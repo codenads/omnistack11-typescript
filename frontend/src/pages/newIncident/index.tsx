@@ -27,7 +27,7 @@ const NewIncident = () => {
         };
 
         try {
-                await api.post('/incidents', { incidentData }, { headers: { Authorization: ongId }});
+                await api.post('/incidents', incidentData , { headers: { Authorization: ongId }});
                 history.push('/profile');
         } catch(err) {
             alert('Não foi possível cadastrar o seu caso')
