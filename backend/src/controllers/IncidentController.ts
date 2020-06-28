@@ -24,8 +24,7 @@ export default class IncidentController {
                     'ongs.email',
                     'ongs.city',
                     'ongs.uf']);
-
-        response.header('count', count); 
+        response.header('count', count['count(*)']); 
         if(!incidents) return response.status(204).json({ error: 'Não há incidentes cadastrados' })
         else return response.json(incidents);
     }
